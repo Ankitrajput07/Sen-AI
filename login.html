@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sen AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="login-page-body-v2">
+
+    <div class="login-wrapper">
+        <div class="login-logo">
+            <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M70.8333 50C70.8333 61.5038 61.5038 70.8333 50 70.8333C38.4962 70.8333 29.1667 61.5038 29.1667 50C29.1667 38.4962 38.4962 29.1667 50 29.1667C55.4856 29.1667 60.4437 31.3174 63.9583 34.832L50 48.7903V50H51.2097L70.8333 30.3764C70.8333 30.3764 70.8333 50 70.8333 50Z" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M50 51.2097L30.3764 70.8333C30.3764 70.8333 50 70.8333 50 70.8333C61.5038 70.8333 70.8333 61.5038 70.8333 50C70.8333 38.4962 61.5038 29.1667 50 29.1667C38.4962 29.1667 29.1667 38.4962 29.1667 50C29.1667 55.4856 31.3174 60.4437 34.832 63.9583L48.7903 50H50V51.2097Z" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        
+        <h2>Welcome to Sen AI</h2>
+        <p>Choose how you would like to sign in</p>
+        
+        <a href="chat.html" class="auth-btn google-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M21.35,11.1H12.18V13.83H18.69C18.36,17.64 15.19,19.27 12.19,19.27C8.36,19.27 5,16.25 5,12C5,7.9 8.2,4.73 12.2,4.73C15.29,4.73 17.1,6.7 17.1,6.7L19,4.72C19,4.72 16.56,2 12.2,2C6.42,2 2.03,6.8 2.03,12C2.03,17.05 6.16,22 12.25,22C17.6,22 21.5,18.33 21.5,12.91C21.5,11.76 21.35,11.1 21.35,11.1V11.1Z"/></svg>
+            Continue with Google
+        </a>
+        
+        <div class="separator">
+            <span>OR <br>CONTINUE WITH YOUR EMAIL</span>
+        </div>
+        
+        <form action="chat.html" method="get">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+            <button type="submit" class="auth-btn email-btn">Send verification code</button>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('login-form');
+        const emailInput = document.getElementById('email');
+        const messageEl = document.getElementById('login-message');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault(); 
+            const email = emailInput.value;
+            messageEl.textContent = '';
+
+            try {
+                // *** THIS IS THE ONLY LINE  TO CHANGE ***
+                const response = await fetch('http://localhost:5000/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email: email })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    messageEl.style.color = 'var(--primary-glow)';
+                    messageEl.textContent = 'Success! Redirecting...';
+                    setTimeout(() => {
+                        window.location.href = 'chat.html';
+                    }, 1500);
+                } else {
+                    messageEl.style.color = '#ff6b6b';
+                    messageEl.textContent = data.message;
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                messageEl.style.color = '#ff6b6b';
+                messageEl.textContent = 'Could not connect to the server.';
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - Sen AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="chat-page">
+
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>⚡ Sen AI</h1>
+            <p>Ask anything. Get perspectives from the world's best AIs.</p>
+        </div>
+        <div id="message-area" class="message-area">
+            <div class="welcome-message">
+                <h2>Select your AIs and ask away!</h2>
+                <p>Choose one or more models below to start.</p>
+            </div>
+        </div>
+        <div class="input-area-container">
+            <div id="model-selector" class="model-selector">
+                </div>
+            
+            <div id="focus-mode-bar" class="focus-mode-bar" style="display: none;">
+                <span id="focus-mode-text"></span>
+                <button id="exit-focus-mode-btn">Exit Focus Mode</button>
+            </div>
+            
+            <div class="input-area">
+                <textarea id="prompt-input" placeholder="Ask anything..."></textarea>
+                <button id="send-button">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 11L12 6L17 11M12 18V7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="chat.js"></script>
+</body>
+</html>
