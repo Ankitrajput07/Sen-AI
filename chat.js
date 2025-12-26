@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const exitFocusModeBtn = document.getElementById('exit-focus-mode-btn');
 
     // API Key (WARNING: Insecure for production)
-    const OPENROUTER_API_KEY = "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";
+    const OPENROUTER_API_KEY = "Add Api key....";
 
     // AI Models
     const models = [
@@ -206,4 +206,5 @@ document.addEventListener('DOMContentLoaded', () => {
     function scrollToBottom() {
         messageArea.scrollTop = messageArea.scrollHeight;
     }
+
 });
